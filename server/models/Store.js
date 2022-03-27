@@ -5,17 +5,17 @@ const storeSchema = new Schema(
     {
         store_name: {
             type: String,
+            unique: true,
             require: true,
             minlength: 3,
             maxlength: 50
         },
         owner: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+            type: String,
+            require: true
         },
         description: {
-            type: String,
-            
+            type: String
         },
         city: {
             type: String,
@@ -29,12 +29,7 @@ const storeSchema = new Schema(
             type: Boolean,
             default: false
         },
-        items: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Item'
-            }
-        ],
+        items: [itemSchema],
     }, opts
 );
 

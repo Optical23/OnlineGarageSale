@@ -17,6 +17,9 @@ const orderSchema = new Schema(
             required: true,
             ref: 'User'
         },
+        created_at: {
+            type: String,
+        },
         bid: {
             type: Schema.Types.Decimal128,
             required: true,
@@ -28,5 +31,5 @@ const orderSchema = new Schema(
     }
 );
 
-const Order = model('Model', orderSchema);
+const Order = model('Order', orderSchema);
 module.exports = Order;
