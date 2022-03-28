@@ -11,8 +11,9 @@ const storeSchema = new Schema(
             maxlength: 50
         },
         owner: {
-            type: String,
-            require: true
+            type: Schema.Types.ObjectId,
+            require: true,
+            ref: 'User'
         },
         description: {
             type: String
@@ -29,7 +30,11 @@ const storeSchema = new Schema(
             type: Boolean,
             default: false
         },
-        items: [itemSchema],
+        items: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        }],
     }, opts
 );
 

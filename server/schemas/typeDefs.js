@@ -50,7 +50,7 @@ const typeDefs = gql`
     type Query {
         me: User
         users: [User]
-        user(full_name: String!): User
+        user(_id: ID!): User
         store(_id: ID!): Store
         stores: [Store]
 
@@ -59,7 +59,7 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(full_name: String!, email: String!, password: String!, city: String!, state: String!): Auth
-        
+        addStore(store_name: String!, description: String, public: Boolean): Store
     }
 `;
 

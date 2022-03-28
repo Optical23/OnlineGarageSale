@@ -20,8 +20,8 @@ const resolvers = {
               .select('-__v -password')
               .populate('orders');
         },
-        user: async (parent, { full_name }) => {
-            return User.findOne({ full_name })
+        user: async (parent, { _id }) => {
+            return User.findOne({ _id })
               .select('-__v -password')
               .populate('orders');
         },
@@ -55,35 +55,33 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-    //     addStore: async (parent, args, context) => {
-    //         console.log("context is store" + context);
-    //         if (context.user) {
-    //           const Store = await Store.create({ ...args, owner: context.user.full_name });
+        addStore: async (parent, args, context) => {
+            if (context.user) {
+              const store = await Store.create({ ...args, owner: context.user._id, city: context.user.city, state: context.user.state });
       
-    //           await User.findByIdAndUpdate(
-    //             { _id: context.user._id },
-    //             { $push: { Store: Store._id } },
-    //             { new: true }
-    //           );
+              await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { store: store._id }
+              );
       
-    //           return Store;
-    //         }
+              return store;
+            }
       
-    //         throw new AuthenticationError('You need to be logged in!');
-    //     },
-    //     addItem: async (parent, args, context) => {
-    //         if (context.user) {
-    //           const updatedStore = await Store.findOneAndUpdate(
-    //             { _id: storeId },
-    //             { $push: { items: { ...args} } },
-    //             { new: true, runValidators: true }
-    //           );
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        // addItem: async (parent, args, context) => {
+        //     if (context.user) {
+        //       const updatedStore = await Store.findOneAndUpdate(
+        //         { _id: storeId },
+        //         { $push: { items: { ...args} } },
+        //         { new: true, runValidators: true }
+        //       );
       
-    //           return updatedStore;
-    //         }
+        //       return updatedStore;
+        //     }
       
-    //         throw new AuthenticationError('You need to be logged in!');
-    //       },
+        //     throw new AuthenticationError('You need to be logged in!');
+        //   },
     //     addOrder: async (parent, args, context) => {
     //         console.log("context is order" + context);
     //         if (context.user) {

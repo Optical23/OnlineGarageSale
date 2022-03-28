@@ -12,8 +12,8 @@ import Item from './pages/Item';
 import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Store from './pages/Store';
+import Login from './pages/Login';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 
 import './App.css';
 const httpLink = createHttpLink({
@@ -43,12 +43,14 @@ function App() {
       <Navbar />
       <div className='container'>
         <Routes>
-            <Route exact path='/' component={Home} ></Route>
-            <Route exact path='/profile' component={Profile}></Route>
-            <Route exact path='/search' component={Search}></Route>
+            <Route exact path='/' element={<Home/>}></Route>
+            <Route exact path='/profile' element={<Profile/>}></Route>
+            <Route exact path='/search' element={<Search/>}></Route>
+            <Route exact path='/login' element={<Login/>} ></Route>
+            <Route exact path='/store' element={<Store/>} ></Route>
+            <Route exact path='/item' element={<Item/>} ></Route>
         </Routes>
       </div>
-      <Footer />
     </Router>
     </ApolloProvider>
   );

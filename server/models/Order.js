@@ -25,7 +25,7 @@ const orderSchema = new Schema(
         },
         accepted: {
             type: Boolean,
-            default: false
+            default: null
         }
     }
 );
