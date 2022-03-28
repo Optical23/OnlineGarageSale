@@ -1,5 +1,4 @@
 const { Schema , model } = require('mongoose');
-const itemSchema = require('./Item');
 
 const opts = {toJson: {virtuals: true, getters: true}};
 const storeSchema = new Schema( 
