@@ -5,10 +5,63 @@ const typeDefs = gql`
         _id: ID
         full_name: String
         email: String
-        city
+        city: String
+        state: String
+        store: Store
+        orders: [Order]
+    }
+
+    type Store {
+        _id: ID
+        store_name: String
+        owner: String
+        description: String
+        city: String
+        state: String
+        public: Boolean
+        items: [Item]
+    }
+
+    type Order {
+        _id: ID
+        item_name: String
+        buyer: User
+        seller: User
+        created_at: String
+        bid: Int
+        accepted: Boolean
+    }
+
+    type Item {
+        _id: ID
+        item_name: String
+        description: String
+        condition: String
+        asking_price: Int
+        created_at: String
+        sold: Boolean
+    }
+
+    type Auth {
+        token: ID!
+        user: User
     }
 
     type Query {
+        me: User
+        users: [User]
+        user(full_name: String!): User
+        store(_id: ID!): Store
+        stores: [Store]
+
+    } 
+
+    type Mutation {
+        login(email: String!, password: String!): Auth
+        addUser(full_name: String!, email: String!, password: String!, city: String!, state: String!): Auth
         
     }
-`
+`;
+
+module.exports = typeDefs;
+   

@@ -1,11 +1,11 @@
 const { Schema , model } = require('mongoose');
+const itemSchema = require('./Item');
 
 const opts = {toJson: {virtuals: true, getters: true}};
 const storeSchema = new Schema( 
     {
         store_name: {
             type: String,
-            unique: true,
             require: true,
             minlength: 3,
             maxlength: 50

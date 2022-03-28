@@ -16,7 +16,7 @@ const itemSchema = new Schema(
             required: true
         },
         asking_price: {
-            type: Number,
+            type: Schema.Types.Decimal128,
             required: true
         },
         created_at: {
