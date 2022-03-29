@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Store, Order} = require('../models');
+const { User, Store, Item, Order} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -26,7 +26,7 @@ const resolvers = {
               .populate('orders');
         },
         store: async (parent, {_id }) => {
-            return Store.findOne({_id});
+            return Store.findOne({_id}).populate('items');
         },
         stores: async () => {
             return Store.find()
@@ -69,19 +69,22 @@ const resolvers = {
       
             throw new AuthenticationError('You need to be logged in!');
         },
-        // addItem: async (parent, args, context) => {
-        //     if (context.user) {
-        //       const updatedStore = await Store.findOneAndUpdate(
-        //         { _id: storeId },
-        //         { $push: { items: { ...args} } },
-        //         { new: true, runValidators: true }
-        //       );
+        addItem: async (parent, args) => {
+          
+          const context = {user: {store: {_id: "62420aaaf2da3ee64f1033de"}}}
+            if (context.user) {
+              const item = await Item.create({...args, storeId: context.user.store._id})
+              await Store.findOneAndUpdate(
+                { _id: context.user.store._id},
+                { $push: { items: { _id: item._id} } },
+                { new: true, runValidators: true }
+              );
       
-        //       return updatedStore;
-        //     }
+              return item;
+            }
       
-        //     throw new AuthenticationError('You need to be logged in!');
-        //   },
+            throw new AuthenticationError('You need to be logged in!');
+          },
     //     addOrder: async (parent, args, context) => {
     //         console.log("context is order" + context);
     //         if (context.user) {

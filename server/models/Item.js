@@ -16,11 +16,13 @@ const itemSchema = new Schema(
             required: true
         },
         asking_price: {
-            type: Schema.Types.Decimal128,
+            type: String,
             required: true
         },
-        created_at: {
-            type: String,
+        storeId: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'Store'
         },
         sold: {
             type: Boolean,
