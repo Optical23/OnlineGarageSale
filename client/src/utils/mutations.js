@@ -51,18 +51,3 @@ mutation($storeName: String!, $description: String, $public: Boolean, $cityName:
     }
   }
 `;
-
-export const ADD_ITEM = gql`
-mutation($itemName: String!, $condition: String!, $askingPrice: String!, $storeId: String!, $description: String) {
-  addItem(item_name: $itemName, condition: $condition, asking_price: $askingPrice, storeId: $storeId , description: $description) {
-    item_name
-    description
-    condition
-    asking_price
-    storeId {
-      _id
-    }
-    sold
-  }
-}
-`;
