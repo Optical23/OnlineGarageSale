@@ -8,8 +8,8 @@ const ItemList = ({items}) => {
         <div>
             {items && 
             items.map(item => (
-                <div className='row'>
-                    {item.item_name}
+                <div key={item._id} className='row'>
+                    <p>Item: {item.item_name} | Description: {item.description} | Condition: {item.condition} | Asking Price: {item.asking_price}</p>
                 </div>
             ))}
         </div>

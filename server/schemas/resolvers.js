@@ -71,10 +71,10 @@ const resolvers = {
         },
         addItem: async (parent, args, context) => {
             if (context.user) {
-              const item = await Item.create({...args, storeId: context.user.store._id})
+              const item = await Item.create({...args})
               await Store.findOneAndUpdate(
-                { _id: context.user.store._id},
-                { $push: { items: { _id: item._id} } },
+                { _id: args.storeId},
+                { $push: { items: item._id} },
                 { new: true, runValidators: true }
               );
       

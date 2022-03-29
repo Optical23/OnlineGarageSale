@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_STORE } from '../utils/queries';
 import ItemList from '../components/ItemList';
+import ItemForm from '../components/ItemForm';
 const StoreController = ({storeId}) => {
     const {loading, data} = useQuery(QUERY_STORE, {
         variables: {id: storeId},
@@ -25,6 +26,9 @@ const StoreController = ({storeId}) => {
             <>
             <ItemList
                 items={itemsInfo}
+            />
+            <ItemForm 
+                store={storeInfo._id}
             />
             </>
         )}

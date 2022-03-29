@@ -24,6 +24,10 @@ const itemSchema = new Schema(
             required: true,
             ref: 'Store'
         },
+        image: {
+            type: String,
+            required: true
+        },
         sold: {
             type: Boolean,
             default: false
