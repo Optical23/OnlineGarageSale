@@ -1,59 +1,23 @@
 import React from 'react';
-import imgTest from './logo512.png';
+import { useQuery } from '@apollo/client';
+import { QUERY_STORES } from '../utils/queries';
+import StoreCard from '../components/StoreCard';
 function Search() {
+    const {loading, data } = useQuery(QUERY_STORES);
+    const stores = data?.stores || [];
+
     return ( 
     <div className='container'>
         <div className='row'>
             <div className='row'>
-                <div className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        <img className='img-thumbnail'
-                            src={imgTest}
-                            ></img>
-                            <h1>STroe name and test</h1>
-                    </a>    
-                </div>
-                <div className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        <img className='img-thumbnail'
-                            src={imgTest}
-                            ></img>
-                            <h1>STroe name and test</h1>
-                    </a>    
-                </div>
-                <div className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        <img className='img-thumbnail'
-                            src={imgTest}
-                            ></img>
-                            <h1>STroe name and test</h1>
-                    </a>    
-                </div>
-                <div className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        <img className='img-thumbnail'
-                            src={imgTest}
-                            ></img>
-                            <h1>STroe name and test</h1>
-                    </a>    
-                </div>
-                <div className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        <img className='img-thumbnail'
-                            src={imgTest}
-                            ></img>
-                            <h1>STroe name and test</h1>
-                    </a>    
-                </div>
-                <div className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        <img className='img-thumbnail'
-                            src={imgTest}
-                            ></img>
-                            <h1>STroe name and test</h1>
-                    </a>    
-                </div>
-
+                hello
+                {loading ? (
+                    <div>Searching for stores </div>
+                ) : (
+                <StoreCard
+                    stores={stores}
+                />
+                )}
             </div>    
         </div>
     </div> );

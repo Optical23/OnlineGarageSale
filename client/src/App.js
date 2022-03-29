@@ -17,7 +17,7 @@ import Navbar from './components/Navbar';
 
 import './App.css';
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -40,17 +40,19 @@ function App() {
   return (
     <ApolloProvider client={client}>
     <Router>
-      <Navbar />
-      <div className='container'>
-        <Routes>
-            <Route exact path='/' element={<Home/>}></Route>
-            <Route exact path='/profile' element={<Profile/>}></Route>
-            <Route exact path='/search' element={<Search/>}></Route>
-            <Route exact path='/login' element={<Login/>} ></Route>
-            <Route exact path='/store' element={<Store/>} ></Route>
-            <Route exact path='/item' element={<Item/>} ></Route>
-        </Routes>
-      </div>
+      <>
+        <Navbar />
+        <div className='container'>
+          <Routes>
+              <Route exact path='/' element={<Home/>}></Route>
+              <Route exact path='/profile' element={<Profile/>}></Route>
+              <Route exact path='/search' element={<Search/>}></Route>
+              <Route exact path='/login' element={<Login/>} ></Route>
+              <Route exact path='/store' element={<Store/>} ></Route>
+              <Route exact path='/item' element={<Item/>} ></Route>
+          </Routes>
+        </div>
+      </>
     </Router>
     </ApolloProvider>
   );
