@@ -13,9 +13,11 @@ import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Store from './pages/Store';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Navbar from './components/Navbar';
 
 import './App.css';
+
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
 });
@@ -48,6 +50,7 @@ function App() {
               <Route exact path='/profile' element={<Profile/>}></Route>
               <Route exact path='/search' element={<Search/>}></Route>
               <Route exact path='/login' element={<Login/>} ></Route>
+              <Route exact path='/signup' element={<Signup/>} ></Route>
               <Route exact path='/store' element={<Store/>} ></Route>
               <Route exact path='/item' element={<Item/>} ></Route>
           </Routes>

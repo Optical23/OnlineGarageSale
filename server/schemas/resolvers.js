@@ -57,7 +57,7 @@ const resolvers = {
         },
         addStore: async (parent, args, context) => {
             if (context.user) {
-              const store = await Store.create({ ...args, owner: context.user._id, city: context.user.city, state: context.user.state });
+              const store = await Store.create({ ...args, owner: context.user._id});
       
               await User.findByIdAndUpdate(
                 { _id: context.user._id },

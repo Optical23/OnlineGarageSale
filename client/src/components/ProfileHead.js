@@ -1,12 +1,18 @@
 import React from 'react';
 
-const ProfileHead = ({self}) => {
-    return ( 
+const ProfileHead = ({name, email}) => {
+    
+    return ( <>
     <div className='row'>
-        {self.full_name}
-        {self.full_name}
-    </div> 
-    );
+        <h1>{name}</h1>
+    </div>
+    <div className='row'>
+        <h5>Email:{email}</h5>
+    </div>
+    <div className='row'>
+        <h3>Your Store:</h3>
+    </div>
+    </>);
 }
 
 export default ProfileHead;

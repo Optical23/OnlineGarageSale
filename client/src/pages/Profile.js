@@ -1,23 +1,31 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_SELF } from '../utils/queries';
-import Auth from '../utils/auth';
 import ProfileHead from '../components/ProfileHead';
-import {Navigate} from 'react-router-dom';
+import StoreController from '../components/StoreController';
+import StoreForm from '../components/StoreForm';
 
 function Profile() {
     const {loading, data} = useQuery(QUERY_SELF);
     const me = data?.me || {};
-    if(!Auth.loggedIn()){
-        return <Navigate replace to='/'/>;
-    }
     return ( 
     <div className='container'>
-        <div className='col-md-6'>
+        <div className='col-md-9'>
             {loading ? (
                 <div>loading</div>
             ):(
-                <ProfileHead self={me} />
+                <>
+                <ProfileHead name={me.full_name}  email={me.email} />
+                {me.store ? (
+                    <StoreController storeId={me.store._id}/>
+                ):(
+                    <>
+                    <h4>Create a store</h4>
+                    <StoreForm city={me.city} state={me.state}/>
+                    </>
+                )}
+                
+                </>
             )}
             
         </div>
