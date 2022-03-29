@@ -10,6 +10,7 @@ const ItemList = ({items}) => {
             items.map(item => (
                 <div className='row'>
                     {item.item_name}
+                    sep{items.length}
                 </div>
             ))}
         </div>
