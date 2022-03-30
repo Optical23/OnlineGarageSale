@@ -21,11 +21,11 @@ function Navbar() {
                   <a href="/" className="nav-item nav-link" onClick={Auth.logout}>Logout</a>
                 </>
               ) : (
-                <div className="navbar-nav ms-auto">
+                <>
                     <a href="/login" className="nav-item nav-link">Login</a>
                     <a href="/signup" className="nav-item nav-link">Signup</a>
                     <a href="/search" className="nav-item nav-link active">Search</a>
-                </div>
+                </>
               )}
                     
                     

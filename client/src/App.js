@@ -51,8 +51,8 @@ function App() {
               <Route exact path='/search' element={<Search/>}></Route>
               <Route exact path='/login' element={<Login/>} ></Route>
               <Route exact path='/signup' element={<Signup/>} ></Route>
-              <Route exact path='/store' element={<Store/>} ></Route>
-              <Route exact path='/item' element={<Item/>} ></Route>
+              <Route exact path='/store/:id' element={<Store/>} ></Route>
+              <Route exact path='/item/:id' element={<Item/>} ></Route>
           </Routes>
         </div>
       </>
