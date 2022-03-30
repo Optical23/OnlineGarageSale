@@ -8,6 +8,7 @@ import StoreForm from '../components/StoreForm';
 function Profile() {
     const {loading, data} = useQuery(QUERY_SELF);
     const me = data?.me || {};
+    console.log(me);
     return ( 
     <div className='container'>
         <div className='col-md-9'>

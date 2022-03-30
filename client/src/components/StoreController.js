@@ -9,8 +9,9 @@ const StoreController = ({storeId}) => {
     });
     
     const storeInfo = data?.store || {};
-    const itemsInfo = data?.store.items || [];
-    console.log(itemsInfo);
+    if(storeInfo.items){
+        var itemsInfo = data?.store.items || [];
+    }
     return ( 
     <>
     <div className='row'>
@@ -24,9 +25,10 @@ const StoreController = ({storeId}) => {
             <div>loading..</div>
         ):(
             <>
-            <ItemList
+            {itemsInfo ? (<ItemList
                 items={itemsInfo}
-            />
+            />):(<div>You have no items in your store</div>)}
+            
             <ItemForm 
                 store={storeInfo._id}
             />

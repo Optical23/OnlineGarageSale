@@ -53,11 +53,12 @@ query($id: ID!) {
       description
       asking_price
       condition
+      image
       sold
     }
   }
 }
-`
+`;
 
 export const QUERY_SELF = gql`
 {
@@ -72,4 +73,21 @@ export const QUERY_SELF = gql`
     }
   }
 }
-`
+`;
+
+export const QUERY_ITEM = gql`
+query($id: ID!) {
+  item(_id: $id) {
+    item_name
+    _id
+    image
+    condition
+    asking_price
+    description
+    sold
+    storeId {
+      _id
+    }
+  }
+}
+`;

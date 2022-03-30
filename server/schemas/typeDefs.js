@@ -54,7 +54,7 @@ const typeDefs = gql`
         user(_id: ID!): User
         store(_id: ID!): Store
         stores: [Store]
-
+        item(_id: ID!): Item
     } 
 
     type Mutation {
@@ -62,6 +62,9 @@ const typeDefs = gql`
         addUser(full_name: String!, email: String!, password: String!, city: String!, state: String!): Auth
         addStore(store_name: String!, description: String, city: String!, state: String!, public: Boolean): Store
         addItem(item_name: String!, description: String, condition: String!, asking_price: String!, storeId: String!, image: String!): Item
+        deleteItems: [Item]
+        deleteStores: Store
+        clearStoreIds: User
     }
 `;
 

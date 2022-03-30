@@ -10,13 +10,12 @@ function Search() {
     <div className='container'>
         <div className='row'>
             <div className='row'>
-                hello
                 {loading ? (
                     <div>Searching for stores </div>
                 ) : (
-                <StoreCard
-                    stores={stores}
-                />
+                    <StoreCard
+                        stores={stores}
+                    />
                 )}
             </div>    
         </div>

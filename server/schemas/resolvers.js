@@ -29,7 +29,10 @@ const resolvers = {
             return Store.findOne({_id}).populate('items');
         },
         stores: async () => {
-            return Store.find()
+            return Store.find().populate('items');
+        },
+        item: async (parent, {_id}) => {
+          return Item.findOne({_id});
         }
     },
     Mutation: {
@@ -83,6 +86,15 @@ const resolvers = {
       
             throw new AuthenticationError('You need to be logged in!');
           },
+          deleteItems: async () => {
+            return Item.deleteMany({});
+          },
+          deleteStores: async () => {
+            return Store.deleteMany({});
+          },
+          clearStoreIds: async () => {
+            return User.updateMany({},{store: null});
+          }
     //     addOrder: async (parent, args, context) => {
     //         console.log("context is order" + context);
     //         if (context.user) {
