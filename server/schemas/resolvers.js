@@ -94,23 +94,23 @@ const resolvers = {
           },
           clearStoreIds: async () => {
             return User.updateMany({},{store: null});
-          }
-    //     addOrder: async (parent, args, context) => {
-    //         console.log("context is order" + context);
-    //         if (context.user) {
-    //           const order = await Order.create({ ...args, buyer: context.user._id});
+          },
+        addOrder: async (parent, args, context) => {
+            console.log(context);
+            if (context.user) {
+              const order = await Order.create({ ...args, buyer: context.user._id});
       
-    //           await User.findByIdAndUpdate(
-    //             { _id: context.user._id },
-    //             { $push: { Store: order._id } },
-    //             { new: true }
-    //           );
+              await User.findByIdAndUpdate(
+                { _id: args.seller },
+                { $push: { orders: order._id } },
+                { new: true }
+              );
       
-    //           return Store;
-    //         }
+              return order;
+            }
       
-    //         throw new AuthenticationError('You need to be logged in!');
-    //     }
+            throw new AuthenticationError('You need to be logged in!');
+        }
     }
 };
 

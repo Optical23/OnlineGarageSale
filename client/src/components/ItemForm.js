@@ -7,29 +7,49 @@ const ItemForm = ({store}) => {
   const [formState, setFormState] = useState({
     itemName: '',
     description: '',
-    askingPrice: '',
+    askingPrice: 0,
     condition:'',
     image: ''
   });
   const [addItem, { error }] = useMutation(ADD_ITEM);
-
+  const addZeroes = (num) => {
+    // Convert input string to a number and store as a variable.
+    var value = Number(num);      
+    // Split the input string into two arrays containing integers/decimals
+        var res = num.split(".");     
+    // If there is no decimal point or only one decimal place found.
+        if(res.length == 1 || res[1].length < 3) { 
+    // Set the number to two decimal places
+            value = value.toFixed(2);
+        }
+    // Return updated or original number.
+    return value;
+  }
   // update state based on form input changes
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    var { name, value } = event.target;
+    if(name == "askingPrice"){
+      value = `${addZeroes(value)}`;
+      
+    }
     
     setFormState({
       ...formState,
       [name]: value,
     });
   };
+
   // submit form
   const handleFormSubmit = async (event) => {
+    event.preventDefault();
     try {
-        
+      console.log(store);
+      console.log(store.owner);
       const { data } = await addItem({
-        variables: { ...formState, storeId: store },
+        variables: { ...formState, storeId: store._id, ownerId: store.owner}, 
       });
     } catch (e) {
+      
       console.error(e);
     }
   };
@@ -77,9 +97,9 @@ const ItemForm = ({store}) => {
                 />
               <input
                 className="form-input"
-                placeholder="Your askingPrice"
+                placeholder="15"
                 name="askingPrice"
-                type="askingPrice"
+                type="number"
                 id="askingPrice"
                 value={formState.askingPrice}
                 onChange={handleChange}

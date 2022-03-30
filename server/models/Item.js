@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose');
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema(
@@ -23,6 +24,11 @@ const itemSchema = new Schema(
             type: Schema.Types.ObjectId,
             required: true,
             ref: 'Store'
+        },
+        ownerId: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
         },
         image: {
             type: String,

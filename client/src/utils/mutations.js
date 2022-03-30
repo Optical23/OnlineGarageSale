@@ -53,17 +53,24 @@ mutation($storeName: String!, $description: String, $public: Boolean, $cityName:
 `;
 
 export const ADD_ITEM = gql`
-mutation($itemName: String!, $condition: String!, $askingPrice: String!, $storeId: String!, $description: String, $image: String!) {
-  addItem(item_name: $itemName, condition: $condition, asking_price: $askingPrice, storeId: $storeId , description: $description, image: $image) {
+mutation($itemName: String!, $description: String, $condition: String!, $askingPrice: String!, $ownerId: String!, $storeId: String!, $image: String!) {
+  addItem(item_name: $itemName, description: $description, condition: $condition, asking_price: $askingPrice, ownerId: $ownerId, storeId: $storeId, image: $image) {
     item_name
     description
     condition
     asking_price
-    image
     storeId {
       _id
     }
     sold
+  }
+}
+`;
+
+export const DELETE_ITEM = gql`
+mutation($id: ID!){
+  deleteItem(_id: $id) {
+    _id
   }
 }
 `;

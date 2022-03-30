@@ -4,6 +4,7 @@ import { QUERY_SELF } from '../utils/queries';
 import ProfileHead from '../components/ProfileHead';
 import StoreController from '../components/StoreController';
 import StoreForm from '../components/StoreForm';
+import OrderList from '../components/OrderList';
 
 function Profile() {
     const {loading, data} = useQuery(QUERY_SELF);
@@ -11,6 +12,7 @@ function Profile() {
     console.log(me);
     return ( 
     <div className='container'>
+        <div className='row'>
         <div className='col-md-9'>
             {loading ? (
                 <div>loading</div>
@@ -31,6 +33,11 @@ function Profile() {
                 </>
             )}
             
+        </div>
+        <div className='col-md-3 border'>
+            <h2>Orders:</h2>
+            <OrderList orders={me.orders}/>
+        </div>
         </div>
     </div>
      );

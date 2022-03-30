@@ -30,7 +30,7 @@ const StoreController = ({storeId}) => {
             />):(<div>You have no items in your store</div>)}
             
             <ItemForm 
-                store={storeInfo._id}
+                store={storeInfo}
             />
             </>
         )}
