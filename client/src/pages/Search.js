@@ -9,7 +9,7 @@ function Search() {
     return ( 
     <div className='container'>
         <div className='row'>
-            <div className='row'>
+            <div className='row d-flex justify-content-between '>
                 {loading ? (
                     <div>Searching for stores </div>
                 ) : (

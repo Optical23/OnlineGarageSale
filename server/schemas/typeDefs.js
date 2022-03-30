@@ -20,6 +20,7 @@ const typeDefs = gql`
         state: String
         public: Boolean
         items: [Item]
+        itemAmount: Int
     }
 
     type Order {

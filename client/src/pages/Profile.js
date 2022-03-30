@@ -18,12 +18,14 @@ function Profile() {
                 <>
                 <ProfileHead name={me.full_name}  email={me.email} />
                 {me.store ? (
-                    <StoreController storeId={me.store._id}/>
+                    <div className='border'>
+                        <StoreController storeId={me.store._id}/>
+                    </div>
                 ):(
-                    <>
+                    <div className='border'>
                     <h4>Create a store</h4>
                     <StoreForm city={me.city} state={me.state}/>
-                    </>
+                    </div>
                 )}
                 
                 </>

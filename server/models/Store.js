@@ -37,7 +37,7 @@ const storeSchema = new Schema(
     }, opts
 );
 
-storeSchema.virtual('items_length').get(function() {
+storeSchema.virtual('itemAmount').get(function() {
     return this.items.length;
 })
 

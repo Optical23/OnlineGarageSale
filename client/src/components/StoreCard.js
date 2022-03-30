@@ -7,21 +7,27 @@ const StoreCard = ({stores}) => {
     }
     return ( 
         <>
-        
             {stores &&
                 stores.map(store =>(
-                <div key={store._id} className='col-lg-3 col-md-4 col-xs-6 thumb'>
-                    <a href='/store' className='thumbnail'>
-                        {store.items[0] ? (
+                <>
+                    {store.items.length ? (
+                    <div key={store._id} className='col-lg-3 col-md-5 col-xs-6 thumb border p-4 m-1'>
+                        <div className='w-100'>
+                        <a href='/store' className='thumbnail font-weight-normal text-dark text-decoration-none'>
                             <StoreThumbnail
+                            className='img-fluid'
                             itemId={store.items[0]._id} 
-                        />
-                        ):(<></>)}
-                        
-                    <h3>{store.store_name}</h3>
-                    </a>
-                </div>
-            ))
+                            />
+                        <h3>{store.store_name}</h3>
+                        <h5>{store.description}</h5>
+                        <h5>Items in Store: {store.itemAmount}</h5>
+                        </a>
+                        </div>
+                    </div>):(
+                    <></>
+                    )}
+                </>
+                ))
             }    
         
         </>

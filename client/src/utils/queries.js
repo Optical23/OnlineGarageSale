@@ -30,6 +30,8 @@ export const QUERY_STORES = gql`
     state
     city
     public
+    itemAmount
+    description
     items {
       _id
     }
@@ -47,6 +49,7 @@ query($id: ID!) {
     city
     state
     public
+    itemAmount
     items {
       _id
       item_name
