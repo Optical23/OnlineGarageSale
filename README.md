@@ -1,7 +1,7 @@
 # Online Garage Sale
 
 ## Description
-An e-commerce site for individuals to sell their goods online whether or not the weather is bad or it's to far away. This site focus on the sellers "Yard sale collection" instead of doing searches for specific items through everyone's yard sale, like most commercial e-commerce sites.
+This site was made to make an easy place for people to buy and sell there old stuff like a garage sale. Whether it or not the whether is good enough for a yard sale you still can with this website. It stores your items allows bids on your items until you except then gives you a way to connect the buyer and seller. 
 
 ## Table of Contents
 
@@ -18,10 +18,10 @@ To work on the repo, start with cloning or downloading the repo. Run npm install
 
 ## Screenshots
 
-This screenshot shows the results when I search for books signed in.
-![Screenshot](/screenshots/search.PNG)
-This screenshot shows the saved books  I have on this account.
-![Screenshot](./screenshots/saved.PNG))
+This screenshot shows the stores available.
+![Screenshot](/screenshots/searchpage.PNG)
+This screenshot shows items and my store I have on this account.
+![Screenshot](./screenshots/storepage.PNG))
 
 
 ### in progress schema
