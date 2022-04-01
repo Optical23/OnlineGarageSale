@@ -1,12 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
 import Auth from '../utils/auth';
 function Navbar() {
     return ( 
     <div className="m-4 sticky-top">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-            <a href="/" className="navbar-brand">Online Garage Sale</a>
+            <Link to="/" className="navbar-brand">Online Garage Sale</Link>
             <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -14,15 +15,15 @@ function Navbar() {
                 <div className="navbar-nav">
                 {Auth.loggedIn() ? (
                 <>
-                  <a href="/profile" className="nav-item nav-link active">Profile/Store</a>
-                  <a href="/search" className="nav-item nav-link active">Search</a>
-                  <a href="/" className="nav-item nav-link" onClick={Auth.logout}>Logout</a>
+                  <Link to="/profile" className="nav-item nav-link active">Profile/Store</Link>
+                  <Link to="/search" className="nav-item nav-link active">Search</Link>
+                  <Link to="/" className="nav-item nav-link" onClick={Auth.logout}>Logout</Link>
                 </>
               ) : (
                 <>
-                    <a href="/login" className="nav-item nav-link">Login</a>
-                    <a href="/signup" className="nav-item nav-link">Signup</a>
-                    <a href="/search" className="nav-item nav-link active">Search</a>
+                    <Link to="/login" className="nav-item nav-link">Login</Link>
+                    <Link to="/signup" className="nav-item nav-link">Signup</Link>
+                    <Link to="/search" className="nav-item nav-link active">Search</Link>
                 </>
               )}
                     
