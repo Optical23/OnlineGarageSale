@@ -25,10 +25,9 @@ const typeDefs = gql`
 
     type Order {
         _id: ID
-        item_name: String
+        itemId: Item
         buyer: User
         seller: User
-        created_at: String
         bid: Int
         accepted: Boolean
     }
@@ -57,6 +56,8 @@ const typeDefs = gql`
         store(_id: ID!): Store
         stores: [Store]
         item(_id: ID!): Item
+        bids(_id: ID!): [Order]
+        order(_id: ID!, bidAmount: String!): Order
     } 
 
     type Mutation {
@@ -67,7 +68,8 @@ const typeDefs = gql`
         deleteItems: [Item]
         deleteStores: Store
         clearStoreIds: User
-        addOrder(item_name: String!, seller: String!, bid: String!): Order
+        addOrder(itemId: String!, seller: String!, bid: String!): Order
+        itemSold(_id: ID!): Item
     }
 `;
 

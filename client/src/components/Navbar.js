@@ -14,9 +14,7 @@ function Navbar() {
                 <div className="navbar-nav">
                 {Auth.loggedIn() ? (
                 <>
-                  <a href="/profile" className="nav-item nav-link active">Profile</a>
-                  <a href="/profile" className="nav-item nav-link active">Store</a>
-                  <a className="nav-item nav-link">Orders</a>
+                  <a href="/profile" className="nav-item nav-link active">Profile/Store</a>
                   <a href="/search" className="nav-item nav-link active">Search</a>
                   <a href="/" className="nav-item nav-link" onClick={Auth.logout}>Logout</a>
                 </>

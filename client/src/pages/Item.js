@@ -1,18 +1,70 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_ITEM } from '../utils/queries';
+import { useMutation, useQuery } from '@apollo/client';
+import { QUERY_ITEM, QUERY_BIDS } from '../utils/queries';
+import { ADD_ORDER } from '../utils/mutations';
 function Item() {
+    const [formState, setFormState] = useState({
+        bid: ''
+    });
+    const [addOrder, {error}] = useMutation(ADD_ORDER);
     let {id: itemId} = useParams();
-    const {loading, data} = useQuery(QUERY_ITEM, {
+    var item = useQuery(QUERY_ITEM, {
         variables: {id: itemId},
     })
-    const item = data?.item || {};
+    var bids = useQuery(QUERY_BIDS, {
+        variables: {id: itemId}
+    })
+
+    const errors = item.error || bids.error;
+    const loading = bids.loading || bids.loading;
+
+    var bids = bids.data?.bids || [];
+    var highestBid = 0;
+    
+    
+    
+    console.log(bids);
+    var item = item.data?.item || {};
+
+    const getHighest = (bids) => {
+        var largest = 0;
+        for (let i = 0; i < bids.length; i++) {
+            const element = bids[i].bid;
+            if(element>largest){
+                largest = element;
+            }
+            
+        }
+        return largest;
+    }
+
+    var highestBid = getHighest(bids);
+    console.log(highestBid);
+
+    const handleChange = (event) => {
+        var { name, value } = event.target;
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+      };
+      const handleFormSubmit = async (event) => {
+
+        try {
+          console.log(item);
+
+          const { data } = await addOrder({
+            variables: { ...formState, itemId: item._id, seller: item.ownerId}, 
+          });
+        } catch (e) {
+          
+          console.error(e);
+        }
+      };
     if (loading) {
         return <div>Loading...</div>;
     }
-    console.log(item);
-    console.log(itemId);
     return ( 
         <div className='container'>
             <div className='row'>
@@ -37,25 +89,40 @@ function Item() {
                             <h4 className='font-weight-normal'>Condition: {item.condition}</h4>
                         </div>
                     </div>
+                    {bids.length ? (
+                    <div className='row'>
+                        <div className='col-md-12'>
+                            <h4 className='font-weight-normal'>Highest bid: {highestBid} </h4>
+                        </div>
+                    </div>
+                    
+                    ):(
                     <div className='row'>
                         <div className='col-md-12'>
                             <h4 className='font-weight-normal'>Asking Price: {item.asking_price}$</h4>
                         </div>
                     </div>
-                    <div className='row'>
+                    )}
+                    {item.sold ? (<div className='row'>Item has been sold!</div>):(
+                        <div className='row'>
                         <div className='col-md-12'>
+                            <form onSubmit={handleFormSubmit}>
                             <input
                             className="form-input"
-                            placeholder={item.asking_price}
-                            name="password"
-                            type="password"
-                            id="password"
+                            placeholder={formState.bid}
+                            name="bid"
+                            type="number"
+                            id="bid"
+                            onChange={handleChange}
                             />
                             <button className="btn d-block w-25" type="submit">
                                 Submit
                             </button>
+                            </form>
                         </div>
-                    </div>
+                    </div>)
+                    }
+                    
                 </div>
             </div>
         </div> );

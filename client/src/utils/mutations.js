@@ -67,10 +67,36 @@ mutation($itemName: String!, $description: String, $condition: String!, $askingP
 }
 `;
 
+export const ADD_ORDER = gql`
+mutation($itemId: String!, $seller: String!, $bid: String!){
+  addOrder(itemId: $itemId, seller: $seller, bid: $bid) {
+    itemId {
+      _id
+    }
+    buyer {
+      _id
+    }
+    seller {
+      _id
+    }
+    bid
+  }
+}
+`;
+
 export const DELETE_ITEM = gql`
 mutation($id: ID!){
   deleteItem(_id: $id) {
     _id
+  }
+}
+`;
+
+export const ITEM_SOLD = gql`
+mutation($id: ID!) {
+  itemSold(_id: $id) {
+    _id
+    item_name
   }
 }
 `;

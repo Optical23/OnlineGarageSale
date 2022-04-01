@@ -33,6 +33,12 @@ const resolvers = {
         },
         item: async (parent, {_id}) => {
           return Item.findOne({_id});
+        },
+        bids: async (parent, {_id}) => {
+          return Order.find({itemId: _id});
+        },
+        order: async (parent, {_id, bidAmount}) => {
+          return Order.findOne({itemId: _id, bid: bidAmount}).populate('buyer');
         }
     },
     Mutation: {
@@ -95,22 +101,28 @@ const resolvers = {
           clearStoreIds: async () => {
             return User.updateMany({},{store: null});
           },
-        addOrder: async (parent, args, context) => {
-            console.log(context);
-            if (context.user) {
-              const order = await Order.create({ ...args, buyer: context.user._id});
-      
-              await User.findByIdAndUpdate(
-                { _id: args.seller },
-                { $push: { orders: order._id } },
-                { new: true }
+          addOrder: async (parent, args, context) => {
+              console.log(context);
+              if (context.user) {
+                const order = await Order.create({ ...args, buyer: context.user._id});
+        
+                await User.findByIdAndUpdate(
+                  { _id: args.seller },
+                  { $push: { orders: order._id } },
+                  { new: true }
+                );
+        
+                return order;
+              }
+        
+              throw new AuthenticationError('You need to be logged in!');
+          },
+          itemSold: async (parent, {_id}) => {
+            return Item.findOneAndUpdate(
+              {_id},
+              {sold: true}
               );
-      
-              return order;
-            }
-      
-            throw new AuthenticationError('You need to be logged in!');
-        }
+          },
     }
 };
 

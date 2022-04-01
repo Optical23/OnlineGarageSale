@@ -2,7 +2,7 @@ const { Schema , model } = require('mongoose');
 
 const orderSchema = new Schema(
     {
-        item_name: {
+        itemId: {
             type: Schema.Types.ObjectId,
             required: true,
             ref: 'Item'

@@ -34,10 +34,16 @@ function Profile() {
             )}
             
         </div>
-        <div className='col-md-3 border'>
-            <h2>Orders:</h2>
-            <OrderList orders={me.orders}/>
-        </div>
+        {loading ? (
+            <div>loading</div>
+        ): (
+            <div className='col-md-3 border'>
+                <h2>Orders:</h2>
+                {me.store?(<><OrderList store={me.store._id}/></>):(<></>)}
+                
+            </div>
+        )}
+        
         </div>
     </div>
      );

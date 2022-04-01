@@ -1,22 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-query user($username: String!) {
-  user(username: $username) {
+query($id: ID!){
+  user(_id: $id) {
     _id
-    username
     email
-    friendCount
-    friends {
-      _id
-      username
-    }
-    thoughts {
-      _id
-      thoughtText
-      createdAt
-      reactionCount
-    }
+    full_name
   }
 }
 `;
@@ -88,9 +77,43 @@ query($id: ID!) {
     asking_price
     description
     sold
+    ownerId
     storeId {
       _id
     }
+  }
+}
+`;
+
+export const QUERY_BIDS = gql`
+query($id: ID!) {
+  bids(_id: $id) {
+    _id
+    bid
+    seller {
+      _id
+    }
+    buyer {
+      _id
+    }
+    itemId {
+      _id
+    }
+  }
+}
+`;
+
+export const QUERY_ORDER = gql`
+query($id: ID!, $bidAmount: String!) {
+  order(_id: $id, bidAmount: $bidAmount) {
+    seller {
+      _id
+    }
+    buyer {
+      _id
+      email
+    }
+    bid
   }
 }
 `;
