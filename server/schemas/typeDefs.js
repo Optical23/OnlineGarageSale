@@ -66,7 +66,7 @@ const typeDefs = gql`
         addStore(store_name: String!, description: String, city: String!, state: String!, public: Boolean): Store
         addItem(item_name: String!, ownerId: String!, description: String, condition: String!, asking_price: String!, storeId: String!, image: String!): Item
         deleteItems: [Item]
-        deleteItem: Item
+        deleteItem(_id: ID!): Item
         deleteStores: Store
         clearStoreIds: User
         addOrder(itemId: String!, seller: String!, bid: String!): Order

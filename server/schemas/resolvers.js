@@ -9,7 +9,7 @@ const resolvers = {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
                 .populate('orders');
-      
+              
               return userData;
             }
       
@@ -94,6 +94,10 @@ const resolvers = {
           },
           deleteItems: async () => {
             return Item.deleteMany({});
+          },
+          deleteItem: async (_id) => {
+            const item = await Item.findOneAndDelete({_id}) 
+            return item;
           },
           deleteStores: async () => {
             return Store.deleteMany({});
