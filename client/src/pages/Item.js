@@ -3,6 +3,8 @@ import {useParams} from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ITEM, QUERY_BIDS } from '../utils/queries';
 import { ADD_ORDER } from '../utils/mutations';
+import {getHighest} from '../utils/highestBid';
+
 function Item() {
     const [formState, setFormState] = useState({
         bid: ''
@@ -20,24 +22,11 @@ function Item() {
     const loading = bids.loading || bids.loading;
 
     var bids = bids.data?.bids || [];
-    var highestBid = 0;
     
     
     
     console.log(bids);
     var item = item.data?.item || {};
-
-    const getHighest = (bids) => {
-        var largest = 0;
-        for (let i = 0; i < bids.length; i++) {
-            const element = bids[i].bid;
-            if(element>largest){
-                largest = element;
-            }
-            
-        }
-        return largest;
-    }
 
     var highestBid = getHighest(bids);
     console.log(highestBid);
@@ -49,7 +38,7 @@ function Item() {
           [name]: value,
         });
       };
-      const handleFormSubmit = async (event) => {
+      const handleFormSubmit = async (e) => {
 
         try {
           console.log(item);
