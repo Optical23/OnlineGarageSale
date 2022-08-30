@@ -14,6 +14,7 @@ function OrderInfo({item}) {
         <div>
             <h5 className='font-weight-normal'>Email: <BuyerDisplay item={item._id} bid={highestBid}/></h5>
         </div>
+        
      );
 };
 
