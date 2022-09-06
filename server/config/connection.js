@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/garage-sale',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
   err => {
     if(err) throw err;
     console.log('Connected to MongoDB!')
