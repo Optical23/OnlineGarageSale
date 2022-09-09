@@ -30,7 +30,7 @@ const Signup = () => {
 
     try {
       const { data } = await addUser({
-        variables: { ...formState },
+        variables: { full_name: formState.fullName, email: formState.email, password: formState.password, city: formState.city, state: formState.state},
       });
 
       Auth.login(data.addUser.token);

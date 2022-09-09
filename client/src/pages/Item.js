@@ -42,7 +42,7 @@ function Item() {
 
         try {
           console.log(item);
-
+            
           const { data } = await addOrder({
             variables: { ...formState, itemId: item._id, seller: item.ownerId}, 
           });
@@ -92,6 +92,7 @@ function Item() {
                         </div>
                     </div>
                     )}
+                    
                     {item.sold ? (<div className='row'>Item has been sold!</div>):(
                         <div className='row'>
                         <div className='col-md-12'>
