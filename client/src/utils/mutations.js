@@ -16,24 +16,18 @@ export const LOGIN = gql`
 `
 
 export const ADD_USER = gql`
-mutation($fullName: String!, $email: String!, $password: String!, $city: String!, $state: String!) {
-    addUser(full_name: $fullName, email: $email, password: $password, city: $city, state: $state) {
-      token
-      user {
-        _id
-        full_name
-        email
-        city
-        state
-        store {
-          _id
-        }
-        orders {
-          _id
-        }
-      }
+mutation AddUser($fullName: String!, $email: String!, $password: String!, $city: String!, $state: String!) {
+  addUser(full_name: $fullName, email: $email, password: $password, city: $city, state: $state) {
+    token
+    user {
+      _id
+      full_name
+      email
+      city
+      state
     }
   }
+}
 `;
 
 export const ADD_STORE = gql`
