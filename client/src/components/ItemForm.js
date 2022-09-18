@@ -41,7 +41,7 @@ const ItemForm = ({store}) => {
 
   // submit form
   const handleFormSubmit = async (event) => {
-
+    event.preventDefault();
     try {
       console.log(store);
       console.log(store.owner);
