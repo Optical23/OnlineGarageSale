@@ -65,6 +65,7 @@ const resolvers = {
             return { token, user };
         },
         addStore: async (parent, args, context) => {
+          try{
             if (context.user) {
               const store = await Store.create({ ...args, owner: context.user._id});
       
@@ -74,12 +75,22 @@ const resolvers = {
               );
       
               return store;
+            
             }
-      
             throw new AuthenticationError('You need to be logged in!');
+            } catch(err) {
+              return {
+                code: err.extensions.response.status,
+                success: false,
+                message: err.extensions.response.body,
+                tack: null
+              };
+            };
+            
         },
         addItem: async (parent, args, context) => {
-            if (context.user) {
+            try{
+              if (context.user) {
               const item = await Item.create({...args})
               await Store.findOneAndUpdate(
                 { _id: args.storeId},
@@ -89,6 +100,14 @@ const resolvers = {
       
               return item;
             }
+            } catch(err) {
+              return {
+                code: err.extensions.response.status,
+                success: false,
+                message: err.extensions.response.body,
+                tack: null
+              };
+            };
       
             throw new AuthenticationError('You need to be logged in!');
           },
@@ -106,7 +125,7 @@ const resolvers = {
             return User.updateMany({},{store: null});
           },
           addOrder: async (parent, args, context) => {
-              console.log(context);
+              try{console.log(context);
               if (context.user) {
                 const order = await Order.create({ ...args, buyer: context.user._id});
         
@@ -120,6 +139,14 @@ const resolvers = {
               }
         
               throw new AuthenticationError('You need to be logged in!');
+              } catch(err) {
+                return {
+                  code: err.extensions.response.status,
+                  success: false,
+                  message: err.extensions.response.body,
+                  tack: null
+                };
+              };
           },
           itemSold: async (parent, {_id}) => {
             return Item.findOneAndUpdate(
