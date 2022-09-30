@@ -21,7 +21,7 @@ const StoreForm = ({city, state}) => {
 
   // submit form
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    
     try {
       const { data } = await addStore({
         variables: { ...formState, cityName: city, stateName: state },

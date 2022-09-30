@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 
 export const LOGIN = gql`
-    mutation login($email: String!, $password: String!) {
+    mutation ($email: String!, $password: String!) {
         login(email: $email, password: $password) {
         token
         user {
@@ -16,7 +16,7 @@ export const LOGIN = gql`
 `
 
 export const ADD_USER = gql`
-mutation AddUser($fullName: String!, $email: String!, $password: String!, $city: String!, $state: String!) {
+mutation ($fullName: String!, $email: String!, $password: String!, $city: String!, $state: String!) {
   addUser(full_name: $fullName, email: $email, password: $password, city: $city, state: $state) {
     token
     user {
@@ -31,7 +31,7 @@ mutation AddUser($fullName: String!, $email: String!, $password: String!, $city:
 `;
 
 export const ADD_STORE = gql`
-mutation($storeName: String!, $description: String, $public: Boolean, $cityName: String!, $stateName: String!) {
+mutation ($storeName: String!, $description: String, $public: Boolean, $cityName: String!, $stateName: String!) {
     addStore(store_name: $storeName, description: $description, public: $public, city: $cityName, state: $stateName) {
       store_name
       description
@@ -39,15 +39,12 @@ mutation($storeName: String!, $description: String, $public: Boolean, $cityName:
       state
       public
       owner
-      items {
-        _id
-      }
     }
   }
 `;
 
 export const ADD_ITEM = gql`
-mutation($itemName: String!, $description: String, $condition: String!, $askingPrice: String!, $ownerId: String!, $storeId: String!, $image: String!) {
+mutation ($itemName: String!, $description: String, $condition: String!, $askingPrice: String!, $ownerId: String!, $storeId: String!, $image: String!) {
   addItem(item_name: $itemName, description: $description, condition: $condition, asking_price: $askingPrice, ownerId: $ownerId, storeId: $storeId, image: $image) {
     item_name
     description
@@ -62,7 +59,7 @@ mutation($itemName: String!, $description: String, $condition: String!, $askingP
 `;
 
 export const ADD_ORDER = gql`
-mutation($itemId: String!, $seller: String!, $bid: String!){
+mutation ($itemId: String!, $seller: String!, $bid: String!){
   addOrder(itemId: $itemId, seller: $seller, bid: $bid) {
     itemId {
       _id
@@ -79,7 +76,7 @@ mutation($itemId: String!, $seller: String!, $bid: String!){
 `;
 
 export const DELETE_ITEM = gql`
-mutation($id: ID!){
+mutation ($id: ID!){
   deleteItem(_id: $id) {
     _id
   }
@@ -87,7 +84,7 @@ mutation($id: ID!){
 `;
 
 export const ITEM_SOLD = gql`
-mutation($id: ID!) {
+mutation ($id: ID!) {
   itemSold(_id: $id) {
     _id
     item_name
